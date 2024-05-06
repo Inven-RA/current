@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile.backend
+    ports:
+      - "3002:3002"
+    env_file:
+      - ./backend/.env
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile.frontend
+    ports:
+       - "3005:3005"
+    env_file:
+      - ./frontend/.env
+    depends_on:
+      - backend
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_SERVER: db
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: inveniraBD
+      POSTGRES_USER: inveniraUser
+      POSTGRES_SCHEMA: invenirabd
+    volumes:
+      - ./backend/mixins/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+

@@ -1,0 +1,540 @@
+openapi: 3.0.0
+
+info:
+  title: 'Invenira API'
+  version: '1.0'
+
+servers:
+  - url: https://localhost:3002/invenira
+    description: Development server
+
+tags:
+  - name: 'M01: iap'
+  - name: 'M02: api'
+  - name: 'M03: users'
+  - name: 'M04: activity'
+  - name: 'M05: deploy'
+
+paths:
+
+  #M01 iap
+  /iap:
+    get:
+      operationId: R101
+      summary: 'R101: List of IAPs'
+      description: 'Retrieve a list of all IAPs or a list of IAPs by their name.'
+      tags:
+        - 'M01: iap'
+      parameters:
+        - in: query
+          name: all
+          required: true
+          schema:
+            type: boolean
+          description: If true, provide a list with all IAPs, otherwise filter by name
+        - in: query
+          name: name
+          schema:
+            type: string
+          description: Provide a list of IAPs by their name
+      responses:
+        '200':
+          description: 'OK, list of IAPs returned'
+
+    post:
+      operationId: R102
+      summary: 'R102: Create IAP'
+      description: 'Create a new IAP.'
+      tags:
+        - 'M01: iap'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                iap:
+                  type: object
+              required:
+                - iap
+      responses:
+        '302':
+          description: 'Redirect after create IAP action'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'iap created successfully'
+                  value: '/iap'
+                302Error:
+                  description: 'Failed to create iap'
+                  value: '/iap'
+
+  /iap/{id}:
+    put:
+      operationId: R103
+      summary: 'R103: Update IAP'
+      description: 'Update an IAP by its ID.'
+      tags:
+        - 'M01: iap'
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                iap:
+                  type: object
+              required:
+                - iap
+      responses:
+        '302':
+          description: 'Redirect after update IAP action'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'IAP updated successfully'
+                  value: '/iap'
+                302Error:
+                  description: 'Failed to update IAP'
+                  value: '/iap'
+
+    delete:
+      operationId: R104
+      summary: 'R104: Delete IAP'
+      description: 'Delete an IAP by its ID.'
+      tags:
+        - 'M01: iap'
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '302':
+          description: 'Redirect after delete IAP action'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'IAP deleted successfully'
+                  value: '/iap'
+                302Error:
+                  description: 'Failed to delete IAP'
+                  value: '/iap'
+
+  # M02 api
+  /api/list-aliases:
+    get:
+      operationId: R201
+      summary: 'R201: List of API aliases'
+      description: 'Provide a list with all API aliases'
+      tags:
+        - 'M02: api'
+      responses:
+        '200':
+          description: 'OK, show list with all API aliases'
+
+  # M03 users
+  /users:
+    get:
+      operationId: R301
+      summary: 'R301: List all users'
+      description: 'This service returns a list of users.'
+      tags:
+        - 'M03: users'
+      responses:
+        '200':
+          description: 'OK, show list with all users'
+    post:
+      operationId: R302
+      summary: 'R302: Create user'
+      description: 'Create a new user'
+      tags:
+        - 'M03: users'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                users:
+                  type: object
+              required:
+                - users
+      responses:
+        '302':
+          description: 'Redirect after create user action'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'User created successfully'
+                  value: '/users'
+                302Error:
+                  description: 'Failed to create user'
+                  value: '/users'
+  /users/{id}:
+    get:
+      operationId: R303
+      summary: 'R303: Get user by ID'
+      description: 'Provide a user by their ID'
+      tags:
+        - 'M03: users'
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'OK, show specific user'
+        '404':
+          description: User not found
+    put:
+      operationId: R304
+      summary: 'R304: Update user'
+      description: 'Update a user by their ID'
+      tags:
+        - 'M03: users'
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                users:
+                  type: object
+              required:
+                - users
+      responses:
+        '302':
+          description: 'Redirect after update user action'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'User updated successfully'
+                  value: '/users'
+                302Error:
+                  description: 'Failed to update user'
+                  value: '/users'
+    delete:
+      operationId: R305
+      summary: 'R305: Delete user'
+      description: 'Delete a user by their ID'
+      tags:
+        - 'M03: users'
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                users:
+                  type: object
+              required:
+                - users
+      responses:
+        '302':
+          description: 'Redirect after delete user action'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'User deleted successfully'
+                  value: '/users'
+                302Error:
+                  description: 'Failed to delete user'
+                  value: '/users'
+
+  # M04 activity
+  /activity:
+    get:
+      operationId: R401
+      summary: 'R401: List of activities'
+      description: 'Provide a list with all activities or a list of activities by their name'
+      tags:
+        - 'M04: activity'
+      parameters:
+        - in: query
+          name: all
+          required: true
+          schema:
+            type: boolean
+          description: If true, provide a list with all activities, otherwise filter by name
+        - in: query
+          name: name
+          schema:
+            type: string
+          description: Provide a list of activities by their name
+      responses:
+        '200':
+          description: 'OK, show list with activities'
+    post:
+      operationId: R402
+      summary: 'R402: Create activity'
+      description: 'Create a new activity'
+      tags:
+        - 'M04: activity'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                activity:
+                  type: object
+              required:
+                - activity
+      responses:
+        '302':
+          description: 'Redirect after created activity'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Activity created successfully'
+                  value: '/activity'
+                302Error:
+                  description: 'Failed to create activity'
+                  value: '/activity'   
+  /activity/{id}:
+    get:
+      operationId: R403
+      summary: 'R403: Specific activity'
+      description: 'Provide an activity by its id'
+      tags:
+        - 'M04: activity'
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'OK, show specific activity'
+        '404':
+          description: Activity not found     
+    put:
+      operationId: R404
+      summary: 'R404: Update activity'
+      description: 'Update an activity by its id'
+      tags:
+        - 'M04: activity'
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                activity:
+                  type: object
+              required:
+                - activity
+      responses:
+        '302':
+          description: 'Redirect after update activity action'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Activity updated successfully'
+                  value: '/activity'
+                302Error:
+                  description: 'Failed to update activity'
+                  value: '/activity'
+    delete:
+      operationId: R405
+      summary: 'R405: Delete activity'
+      description: 'Delete an activity by its id'
+      tags:
+        - 'M04: activity'
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                activity:
+                  type: object
+              required:
+                - activity
+      responses:
+        '302':
+          description: 'Redirect after delete activity action'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Activity deleted successfully'
+                  value: '/activity'
+                302Error:
+                  description: 'Failed to delete activity'
+                  value: '/activity'
+
+  #M05 deploy
+  /deploy: 
+    post:
+      operationId: R501
+      summary: 'R501: Create deployed IAP object'
+      description: 'Action to create a deployed IAP object'
+      tags: 
+        - 'M05: deploy'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                act_id:
+                  type: integer
+                objectives:
+                  type: array
+              required:
+                - act_id
+                - objectives
+      responses:
+        '302':
+          description: 'Redirect after created deployed IAP'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Deployed activity created successfully'
+                  value: '/deploy/iap'
+                302Error:
+                  description: 'Failed to create deployed activity'
+                  value: '/deploy/iap'
+  /deploy/iap: 
+    get:
+      operationId: R502
+      summary: 'R502: Deployed IAPs'
+      description: 'Provide a list with all deployed IAPs'
+      tags:
+        - 'M05: deploy'
+      responses:
+        '200':
+          description: 'OK, show list with all deployed IAPs'
+  /deploy/iap/{id}:
+    get:
+      operationId: R503
+      summary: 'R503: Specific deployed IAP'
+      description: 'Provide a deployed IAP by its id'
+      tags:
+        - 'M05: deploy'
+      parameters:
+       - in: path
+         name: id
+         schema:
+           type: string
+         required: true
+      responses:
+        '200':
+          description: 'OK, show specific deployed IAP'
+        '404':
+          description: 'Deployed IAP not found'
+  /deploy/activities/{id}:
+    get:
+      operationId: R504
+      summary: 'R504: Activities inside deployed IAP'
+      description: 'Provide a list of the Activities inside deployed IAP'
+      tags:
+        - 'M05: deploy'
+      parameters:
+       - in: path
+         name: id
+         schema:
+           type: string
+         required: true
+      responses:
+        '200':
+          description: 'OK, show Activities inside deployed IAP'
+        '404':
+          description: 'Deployed IAP not found'
+  /deploy/activity/:
+    get:
+      operationId: R505
+      summary: 'R505: Trigger deployed activity'
+      description: 'starts an activity and redirects user to experience URL'
+      tags:
+        - 'M05: deploy'
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '301':
+          description: 'Redirect to deployment URL'
+        '404':
+          description: 'Not found' 

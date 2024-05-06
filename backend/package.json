@@ -1,0 +1,51 @@
+{
+  "name": "invenira-backend",
+  "version": "1.0.0",
+  "description": "Backend for Inven!RA",
+  "main": "index.js",
+  "scripts": {
+    "moleculer": "moleculer-runner --repl --hot services/**/*.service.js -e",
+    "start": "moleculer-runner",
+    "cli": "moleculer connect ",
+    "test": "mocha test"
+  },
+  "author": "ei09044@fe.up.pt",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "moleculer": "^0.14.33",
+    "moleculer-db": "^0.8.4",
+    "moleculer-web": "^0.10.5",
+    "pg": "^8.7.1",          
+    "sequelize": "^6.6.5",    
+    "moodle-client": "^0.5.1",
+    "pg": "^8.11.5",
+    "request": "^2.88.2",
+    "test": "^3.3.0"
+  },
+  "devDependencies": {
+    "chai": "^5.1.0",
+    "chai-http": "^4.4.0",
+    "eslint": "^8.44.0",
+    "jest": "^25.5.4",
+    "jest-cli": "^25.1.0",
+    "mocha": "^10.4.0",
+    "moleculer-repl": "^0.6.2",
+    "nodemon": "^1.14.9",
+    "nyc": "^15.1.0"
+  },
+  "engines": {
+    "node": ">= 10.x.x"
+  },
+  "jest": {
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node",
+    "rootDir": "./services",
+    "roots": [
+      "../test"
+    ]
+  }
+}

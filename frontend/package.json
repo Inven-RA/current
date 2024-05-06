@@ -1,0 +1,64 @@
+{
+  "name": "invenira-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@fortawesome/fontawesome-svg-core": "^1.2.28",
+    "@fortawesome/free-solid-svg-icons": "^5.13.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@mui/material": "^5.11.12",
+    "axios": "^1.4.0",
+    "bootstrap": "^4.4.1",
+    "cytoscape": "^3.14.1",
+    "cytoscape-cxtmenu": "^3.1.1",
+    "cytoscape-edgehandles": "^3.6.0",
+    "dotenv": "^8.2.0",
+    "emoji-picker-react": "^4.4.9",
+    "html-react-parser": "^3.0.12",
+    "interactjs": "^1.9.10",
+    "mdb-react-ui-kit": "^6.0.0",
+    "mdbreact": "^5.2.0",
+    "rc-slider": "^10.2.0",
+    "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-bootstrap": "^1.0.0",
+    "react-cytoscapejs": "^1.2.1",
+    "react-dom": "^18.2.0",
+    "react-iframe": "^1.8.0",
+    "react-range": "^1.8.14",
+    "react-router-dom": "^6.11.2",
+    "react-scripts": "^5.0.1",
+    "realm-web": "^1.5.1",
+    "sqlite3": "^5.1.6",
+    "uuid": "^7.0.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "db": "cd server && node server.js",
+    "backend": "cd ../pi-invenira-backend && npm run moleculer --silent",
+    "frontend": "npm start --silent",
+    "dev": "concurrently \"npm run db\" \"npm run backend\" \"npm run frontend\""
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "^8.1.0"
+  }
+}

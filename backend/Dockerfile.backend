@@ -1,0 +1,27 @@
+# Use the official Node.js image as base
+FROM node:14
+
+# Set the working directory inside the container
+WORKDIR /usr/src/app/backend
+
+# Copy the package.json and package-lock.json files
+COPY ./backend/package*.json ./
+
+# Install dependencies
+RUN npm install
+RUN npm install bcrypt
+RUN npm install axios
+RUN npm audit fix --force
+RUN npm install moleculer-db-adapter-sequelize sequelize --save
+
+#RUN npm install pg pg-hstore --save
+#RUN npm install sequelize
+
+# Copy the rest of the application code
+COPY ./backend ./
+
+# Expose the port on which the backend will run
+EXPOSE 3002
+
+# Command to run the backend
+CMD ["npm", "run", "moleculer"]

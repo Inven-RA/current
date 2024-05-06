@@ -1,0 +1,21 @@
+# Use the official Node.js image as base
+FROM node:14
+
+# Set the working directory inside the container
+WORKDIR /usr/src/app/frontend
+
+# Copy the package.json and package-lock.json files
+COPY ./frontend/package*.json ./
+
+# Install dependencies
+RUN npm install
+RUN npm audit fix --force
+
+# Copy the rest of the application code
+COPY ./frontend ./
+
+# Expose the port on which the frontend will run
+EXPOSE 3005
+
+# Command to run the frontend
+CMD ["npm", "start"]
