@@ -1,4 +1,4 @@
-# PI 12 - InvenIRA app
+# Inven!RA app
 
 ## Running the application ##
 
